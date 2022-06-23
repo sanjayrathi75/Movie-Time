@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Movie Time</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="icon" type="image/png" href="images/icon.png" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/mediaQueries.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row align-items-center justify-content-center full-height">
+            <h1 class="display-4"><span>Movie</span><span>Time</span></h1>
+            <div class="col-9 search-input">
+                <div class="input-group mb-3 row no-gutters justify-content-center">
+                    <div class="input-group-prepend col-auto pb-3 p-lg-0">
+                        <select class="form-control type-select pl-1">
+						 	<option class="dropdown-item" value="movie" selected="selected">
+						 		Movies
+						 	</option>
+						 	<option class="dropdown-item" value="series">Series</option>
+						 	<option class="dropdown-item" value="episode">Episodes</option>
+						 	<option class="dropdown-item" value="game">Games</option>
+						</select>
+                    </div>
+                    <div class="col-12 col-sm-10 col-lg-auto flex-grow">
+                        <input type="text" class="form-control movie-search py-2" placeholder="Search for any movie" aria-describedby="basic-addon2">
+                    </div>
+                    <div class="input-group-append col-auto pt-3 p-sm-0">
+                        <button class="btn search-button px-3" type="button"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+
+                <p style="color: grey" class="text-center">or</p>
+
+                <div class="row no-gutters mb-3">
+                    <span style="color: lightgrey" class="col-12 col-lg-3 pb-1 pb-lg-0">Search by title</span>
+                    <div class="col-lg-auto flex-grow mr-lg-3">
+                        <div class="input-group input-group-sm row no-gutters mb-2 m-lg-0">
+                            <div class="input-group-prepend col-auto">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Title</span>
+                            </div>
+                            <input id="name-input" type="text" class="form-control col-10" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="input-group input-group-sm row no-gutters">
+                            <div class="input-group-prepend col-auto">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Year</span>
+                            </div>
+                            <input id="year-input" type="number" class="form-control col-10" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row no-gutters">
+                    <span style="color: lightgrey" class="col-12 col-lg-3 pb-1 pb-lg-0">Search by IMBd id</span>
+                    <div class="col-lg-auto flex-grow">
+                        <div class="input-group input-group-sm row no-gutters mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">IMBd id</span>
+                            </div>
+                            <input id="imbd-input" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <button class="btn btn-outline-secondary search-outline-button" style="margin: auto;" data-style="zoom-out" data-spinner-size="40" data-spinner-color="#ff0000"><span class="ladda-label">Search</span></button>
+                </div>
+
+                <div class="loader col-12">
+                    <div class="row align-items-center justify-content-center">
+                        <img src="images/loader/movie.png" class="img-fluid">
+                    </div>
+                </div>
+
+            </div>
+            <!-- end col -->
+
+        </div>
+        <!-- end row -->
+
+        <div id="search-results">
+            <span id="result-count" class="lead px-2"></span>
+            <div id="movie-results" class="row mb-5 no-gutters justify-content-around">
+            </div>
+            <nav area-label="search navigation">
+                <ul id="pagination-search" class="pagination justify-content-center">
+                </ul>
+            </nav>
+        </div>
+        <!-- end search-results -->
+
+        <div class="row pt-4" id="movie-card">
+            <div class="col-12">
+                <div class="movie-info">
+                    <div class="row">
+                        <div class="col-12 col-lg-3 pr-0">
+                            <img src="" class="movie-poster img-fluid p-0 pt-4 pt-lg-0 mx-auto d-block">
+                        </div>
+                        <div class="col-12 col-lg-9">
+                            <div class="row movie-data text-center text-lg-left">
+                                <span class="col-12 movie-name"></span>
+                                <small class="col-12 movie-runtime"></small>
+                                <hr>
+                                <span class="col-12 movie-plot"></span>
+                                <span class="col-12 movie-director mt-2"></span>
+                                <span class="col-12 movie-writer"></span>
+                                <span class="col-12 movie-actors"></span>
+                                <span class="col-12 movie-box-office"></span>
+                                <div class="col-12 movie-rated"></div>
+                                <span class="col-12 movie-yt my-2"></span>
+                            </div>
+                            <div class="col-12 movie-ratings">
+                                <div class="row source justify-content-center px-3 px-md-0"></div>
+                            </div>
+                            <!-- end movie data -->
+                        </div>
+                    </div>
+                    <!-- end row -->
+                </div>
+            </div>
+            <div class="col-12 my-2">
+                <div class="row awards-card no-gutters px-4">
+                    <div class="col-12 lead py-1 movie-awards text-center" style="font-size: 1.5rem">
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 my-2">
+                <div class="row detail-card no-gutters p-4">
+                    <div class="col-12 lead pt-1" style="font-size: 1.8rem">Storyline
+                        <hr class="m-0 mt-2 mb-3">
+                    </div>
+                    <div class="col-12 movie-storyline pb-4"></div>
+                </div>
+            </div>
+            <div class="col-12 my-2">
+                <div class="row">
+
+                    <div class="col-12 col-md-6">
+                        <div class="row detail-card no-gutters p-4">
+                            <div class="col-12 lead pt-1" style="font-size: 1.8rem">Details
+                                <hr class="m-0 mt-2 mb-3">
+                            </div>
+                            <div class="col-12">
+                                <div class="row movie-details pb-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="row detail-card no-gutters p-4">
+                            <div class="col-12 lead pt-1" style="font-size: 1.8rem">
+                                <img class="img-fluid imbd" src="images/rating_source/Internet Movie Database.png">
+                                <hr class="m-0 mt-2 mb-3">
+                            </div>
+                            <div class="col-12">
+                                <div class="row movie-imbd pb-4"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- end movie-card -->
+
+    </div>
+    <!-- end container -->
+
+    <div id="toast"></div>
+
+    <footer>
+        <div class="container">
+            <div class="row pt-4 justify-content-between">
+                <div class="col-12 col-lg-auto text-center text-lg-left">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="mr-3">Made using OMDb API</span>
+                        </div>
+                        <div class="col-12">
+                            <small><a href="http://www.omdbapi.com" target="blank">www.omdbapi.com</a></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-auto text-center text-lg-right pt-2 p-lg-0">
+                    <div class="row">
+                        <div class="col-12">
+                            <a href="https://github.com/nitin095" target="blank"><i class="fab fa-github mr-3"></i></a>
+                        </div>
+                        <div class="col-12">
+                            <i class="fas fa-at"></i>
+                            <small>sanjayrathi575@gmail.com</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 text-center py-1">
+                    <small style="color: grey">&copy;Sanjay Rathi @2021</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Javascript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="js/app.js"></script>
+    <script src="js/esimakin-twbs-pagination-9b6d211/jquery.twbsPagination.js"></script>
+</body>
+
+</html>
